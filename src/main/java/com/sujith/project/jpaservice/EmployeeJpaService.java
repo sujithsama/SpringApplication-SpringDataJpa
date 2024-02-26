@@ -10,6 +10,7 @@ import jakarta.transaction.*;
 import org.apache.commons.lang.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.method.annotation.*;
 
@@ -58,7 +59,7 @@ public class EmployeeJpaService {
 
 
     public List<Employee> findAll() {
-        return employeeJpa.findAll();
+        return employeeJpa.findAll(Sort.by("firstName"));
     }
 
 
@@ -72,7 +73,7 @@ public class EmployeeJpaService {
 
         try {
             Employee emp = employeeMapper.copyToEmp(theEmployee);
-            employeeJpa.save(emp);
+            employeeDao.save(emp);
             return emp;
 
 
@@ -94,7 +95,7 @@ public class EmployeeJpaService {
 
 
         }
-        return employeeJpa.saveAll(employeeList);
+        return employeeDao.saveAll(employeeList);
     }
 
 

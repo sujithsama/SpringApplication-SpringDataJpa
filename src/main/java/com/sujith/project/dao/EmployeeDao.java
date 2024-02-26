@@ -25,4 +25,6 @@ public interface EmployeeDao {
     Employee updateSalaryById(int id, int salary);
 
     List<Employee> getEmployeesByCourseName(String name);
+
+    List<Employee> saveAll(List<Employee> employeeList);
 }

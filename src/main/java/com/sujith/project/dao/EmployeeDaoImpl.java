@@ -3,6 +3,7 @@ package com.sujith.project.dao;
 import com.sujith.project.entity.*;
 import com.sujith.project.exceptions.*;
 import jakarta.persistence.*;
+import jakarta.transaction.*;
 import jakarta.validation.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
@@ -127,5 +128,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
         } else {
             return tempEmp;
         }
+    }
+
+    @Override
+    @Transactional
+    public List<Employee> saveAll(List<Employee> employeeList) {
+        List<Employee> employees=new ArrayList<>();
+        for (Employee emp:employeeList
+             ) {
+            employees.add(save(emp));
+        }
+        return employees;
     }
 }
