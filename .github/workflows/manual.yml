@@ -3,7 +3,7 @@ name: Auto Merge develop to qa
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
   merge:
@@ -20,11 +20,10 @@ jobs:
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
 
-      - name: Merge develop into qa
+      - name: Merge main into qa
         run: |
           git fetch origin
           git checkout qa
-          git merge origin/develop --no-edit
+          git merge origin/main --no-edit
           git push origin qa
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
